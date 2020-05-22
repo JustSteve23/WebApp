@@ -15,7 +15,7 @@ $(document).ready(function() {
 	let id;
 	//for(let i=0;i<6;i++){
 		id=1;
-	RQindex=inviaRichiesta("GET","server/elencoAuto.php",{"id":id});
+	RQindex=inviaRichiesta("GET","server/elencoAuto.php");
 	//}
 
 	RQindex.fail(function (jqXHR,test_status,str_error) {
