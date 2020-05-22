@@ -1,51 +1,45 @@
 "use strict"
+let images=[];
 
-$(document).ready(function() {	
+$(document).ready(function() {
+	let _body=$("body");
 	let _wrapper=$("#wrapper");
-	let _titolo=$("#divTitolo");
-	let _filiali=$("#divFiliali");
-	let _movimenti=$("#divMovimenti");
+	let _splashScreen=$("#splashScreen");
 
+	_body.addClass("bodyW");
 	_wrapper.hide();
+	_splashScreen.show();
 
-	let RQfiliali=inviaRichiesta("GET","server/elencoFiliali.php");
-	RQfiliali.fail(function (jqXHR,test_status,str_error) {
+
+	let RQindex;
+	let id;
+	//for(let i=0;i<6;i++){
+		id=1;
+	RQindex=inviaRichiesta("GET","server/elencoAuto.php",{"id":id});
+	//}
+
+	RQindex.fail(function (jqXHR,test_status,str_error) {
 		if (jqXHR.status==403)
 			window.location.href="login.html";
 		else
 			error(jqXHR,test_status,str_error);
 	});
 
-	RQfiliali.done(function (data) {
+	RQindex.done(function (data) {
+		setTimeout(function () {
+			_body.removeClass("bodyW");
+			_body.addClass("bodyMain");
+			_splashScreen.hide();
+			_wrapper.show();
+		},1500);
+
 		console.log(data);
-		_wrapper.show();
-		_movimenti.hide();
 
-		let p=$("<p>",{
-			"css":{"text-align":"right"},
-			"html":"Benvenuto <b>"+ data["name"]+"</b>"
-		}).appendTo(_titolo);
-
-		for (let r of data["data"]){
-			$("").on("click",function () {
-				let _checked=$("inputp[type=radio]:checked");
-				if (_checked.length==0)
-					alert("Nessuna filiale selezionata");
-				else {
-					let cFiliale = _checked[0].value;
-					let rqMovimenti = inviaRichiesta("POST", "server/elencoMovimenti.php", {"cFiliale": cFiliale});
-					rqMovimenti.fail(function (jqXHR, text_status, str_error) {
-						if (jqXHR.status == 403) {
-							window.location.href = "login.html";
-						}
-						else
-							error(jqXHR, text_status, str_error)
-					})
-					rqMovimenti.done(function (data) {
-						console.log(data);
-					})
-				}
-			});
-		}
+		$("#accBtn").html(data["nominativo"]);
 	});
-});
+
+	$("#logOut").on("click",function () {
+		let RQLogOut=inviaRichiesta("POST","server/logOut.php");
+		window.location.href="index.html";
+	})
+})

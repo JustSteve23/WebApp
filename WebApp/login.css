@@ -9,6 +9,14 @@
 	src: url("font/Yellowtail/Yellowtail-Regular.ttf");
 }
 
+body{
+	background-color: #3acbcb;
+}
+
+.jumbotron{
+	background-color: transparent;
+}
+
 #title{
 	font-family: "yellowTail",Helvetica,Serif;
 	font-weight:normal;

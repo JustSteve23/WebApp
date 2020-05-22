@@ -1,5 +1,73 @@
-* {
-	margin: 0;
-	padding: 0;
+
+#home{
+clip-path: url(#cache);
 }
 
+.bodyW{
+  background-color: #3acbcb;
+}
+.bodyMain{
+  /*background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);*/
+  background: linear-gradient(-45deg, #444444, rgba(56, 56, 56, 0.96), #242424, rgba(0, 0, 0, 0.98));
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+
+}
+body {
+  padding-top: 56px;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@font-face{
+  font-family: "yellowTail";
+  src: url("font/Yellowtail/Yellowtail-Regular.ttf");
+}
+
+.corsivo{
+  font-family: "yellowTail",Helvetica,Serif;
+  font-weight:normal;
+  font-style:normal;
+}
+
+.centered{
+  margin-left: 50%;
+  margin-right: 50%;
+}
+
+.centered:hover{
+  cursor: pointer;
+}
+
+.card{
+  border-radius: 8%;
+}
+
+.btn{
+  width: 310px;
+  height: 40px;
+  font-size: 16pt;
+}
+
+.splashScreen{
+  position: fixed;
+  top: 23%;
+  bottom: 10%;
+  left: 39%;
+  right: 50%;
+}
+
+.spinner{
+  margin-left: 90%;
+  margin-top: 3%;
+}
