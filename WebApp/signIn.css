@@ -1,0 +1,29 @@
+
+
+
+/*  In bootstrap 4, invece di utilizzare la classe "alert-danger",
+    abbiamo ricolorato icona e bordino a mano tramite la seguente classe:
+*/
+@font-face{
+	font-family: "yellowTail";
+	src: url("font/Yellowtail/Yellowtail-Regular.ttf");
+}
+
+#title{
+	font-family: "yellowTail",Helvetica,Serif;
+	font-weight:normal;
+	font-style:normal;
+	font-size: 45pt;
+}
+
+#lblSN{
+	font-family: "yellowTail",Helvetica,Serif;
+	font-weight:normal;
+	font-style:normal;
+}
+
+.icona-rossa{
+	color: #dc3545;  /* colore usato da is-invalid */
+	border:1px solid #dc3545; 
+	border-right:transparent;
+}
