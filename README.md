@@ -6,8 +6,7 @@
 
 
 ## Cosa è Luxury Cars ##
-> Luxury cars è:
-> Un sito che si occupa di vendita di automobili di lusso di ogni epoca
+> Luxury cars è: Un sito che si occupa di vendita di automobili di lusso di ogni epoca
 
 ## Progetto ##
 Il progetto è un progrtto client server che utilizza le tecnologie:
