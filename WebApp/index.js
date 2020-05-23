@@ -2,9 +2,21 @@
 let images=[];
 
 $(document).ready(function() {
+	let image=["img/auto/sf-90str.jpg","img/auto/fordgt40.jpg","img/auto/kRegera.jpg","img/auto/lAventador.jpg","img/auto/p911turboS.jpg","img/auto/fF40.jpg"];
+
 	let _body=$("body");
 	let _wrapper=$("#wrapper");
 	let _splashScreen=$("#splashScreen");
+
+	let _lblPageNumber=$("#lblPage");
+	let _buttonBackPage=$("#btnPBack");
+	_buttonBackPage.show();
+	let _buttonNextPage=$("#btnPNext");
+	_buttonNextPage.show();
+	let pagenumber=_lblPageNumber.html();
+	console.log(pagenumber);
+	if (pagenumber==1)
+		_buttonBackPage.hide();
 
 	_body.addClass("bodyW");
 	_wrapper.hide();
@@ -36,6 +48,17 @@ $(document).ready(function() {
 		console.log(data);
 
 		$("#accBtn").html(data["nominativo"]);
+
+		for (let i=0;i<6;i++){
+			$("#cardImg"+(i+1)).prop({"src":image[i]});
+			$("#title"+(i+1)).html(data["data"][i]["marca"]+" "+data["data"][i]["modello"]);
+			$("#cardInfo"+(i+1)).html(
+				"-Potenza: "+data["data"][i]["potenza"]+" CV <br>"+
+				"-Cilindrata: "+data["data"][i]["cilindrata"]+" cm3 <br>"+
+				"-Prezzo: "+data["data"][i]["prezzo"]+"€"
+			);
+			$("#btnCard"+(i+1)).prop({"name":data["data"][i]["id"]});
+		}
 	});
 
 	$("#logOut").on("click",function () {

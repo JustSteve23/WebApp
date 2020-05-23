@@ -8,7 +8,7 @@ clip-path: url(#cache);
 }
 .bodyMain{
   /*background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);*/
-  background: linear-gradient(-45deg, #444444, rgba(56, 56, 56, 0.96), #242424, rgba(0, 0, 0, 0));
+  background: linear-gradient(-45deg, #303030, rgba(41, 41, 41, 0.96), #242424, rgb(0, 0, 0));
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
@@ -50,6 +50,9 @@ body {
 
 .card{
   border-radius: 8%;
+  background-color: rgba(58,203,203,0);
+  border: 1px solid #3acbcb;
+  color: white;
 }
 
 .btn{
@@ -58,15 +61,8 @@ body {
   font-size: 16pt;
 }
 
-.splashScreen{
-  position: absolute;
-  top: 23%;
-  bottom: 10%;
-  left: 36%;
-  right: 45%;
-}
-
 .spinner{
-  position: absolute;
-  right: 19.5%;
+  position: fixed;
+  left: 50%;
+  top: 46%;
 }
