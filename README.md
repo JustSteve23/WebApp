@@ -12,10 +12,10 @@
 ## Progetto ##
 Il progetto è un progrtto client server che utilizza le tecnologie:
 * Server:
-** PHP
-** Ajax
+  - PHP
+  - Ajax
 
 * Client:
-** HTML 
-** CSS
-** Javascrip (utilizzando la libreria Jquery)
+  - HTML 
+  - CSS
+  - Javascrip (utilizzando la libreria Jquery)
