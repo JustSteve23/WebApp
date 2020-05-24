@@ -4,16 +4,15 @@ $(document).ready(function() {
 	let _body=$("body");
 	let _wrapper=$("#wrapper");
 	let _splashScreen=$("#splashScreen");
+	let carData;
 
 	let _lblPageNumber=$("#lblPage");
 	let _buttonBackPage=$("#btnPBack");
-	_buttonBackPage.show();
+	_buttonBackPage.hide();
 	let _buttonNextPage=$("#btnPNext");
 	_buttonNextPage.show();
 	let pagenumber=_lblPageNumber.html();
 	console.log("Page N: "+pagenumber);
-	if (pagenumber==1)
-		_buttonBackPage.hide();
 
 	_body.addClass("bodyW");
 	_wrapper.hide();
@@ -33,6 +32,7 @@ $(document).ready(function() {
 	});
 
 	RQindex.done(function (data) {
+		carData=data;
 		setTimeout(function () {
 			_body.removeClass("bodyW");
 			_body.addClass("bodyMain");
@@ -40,20 +40,11 @@ $(document).ready(function() {
 			_wrapper.show();
 		},1500);
 
-		console.log(data);
+		console.log(carData);
 
 		$("#accBtn").html(data["nominativo"]);
 
-		for (let i=0;i<6;i++){
-			$("#cardImg"+(i+1)).prop({"src":images[i]});
-			$("#title"+(i+1)).html(data["data"][i]["marca"]+" "+data["data"][i]["modello"]);
-			$("#cardInfo"+(i+1)).html(
-				"-Potenza: "+data["data"][i]["potenza"]+" CV <br>"+
-				"-Cilindrata: "+data["data"][i]["cilindrata"]+" cm3 <br>"+
-				"-Prezzo: "+data["data"][i]["prezzo"]+"€"
-			);
-			$("#btnCard-"+(i+1)).prop({"name":data["data"][i]["id"]});
-		}
+		dataPush(data,pagenumber,_buttonBackPage,_buttonNextPage);
 	});
 
 	$(".moreInfo").on("click",function () {
@@ -66,4 +57,47 @@ $(document).ready(function() {
 		let RQLogOut=inviaRichiesta("POST","server/logOut.php");
 		window.location.href="index.html";
 	})
+
+	_buttonNextPage.on("click",function () {
+		pagenumber++;
+		_lblPageNumber.html(pagenumber);
+		dataPush(carData,pagenumber,_buttonBackPage,_buttonNextPage)
+	})
+	_buttonBackPage.on("click",function(){
+		pagenumber--;
+		_lblPageNumber.html(pagenumber);
+		dataPush(carData,pagenumber,_buttonBackPage,_buttonNextPage)
+	})
 })
+
+function dataPush(data,pagenumber,_buttonBackPage,_buttonNextPage) {
+	_buttonBackPage.show();
+	_buttonNextPage.show();
+	if (pagenumber==1)
+		_buttonBackPage.hide();
+	const dataUpperID=6;
+	let basePageID=0;
+	if (pagenumber>1){
+		for (let i=0;i<pagenumber-1;i++){
+			basePageID+=dataUpperID;
+		}
+	}
+	for (let i=0;i<6;i++){
+		try{
+			$("#cb"+(i+1)).show();
+			$("#cardImg" + (i + 1)).prop({"src":""});
+			$("#cardImg" + (i + 1)).prop({"src": images[i + basePageID]});
+			$("#title" + (i + 1)).html(data["data"][i + basePageID]["marca"] + " " + data["data"][i + basePageID]["modello"]);
+			$("#cardInfo" + (i + 1)).html(
+				"-Potenza: " + data["data"][i + basePageID]["potenza"] + " CV <br>" +
+				"-Cilindrata: " + data["data"][i + basePageID]["cilindrata"] + " cm3 <br>" +
+				"-Prezzo: " + data["data"][i + basePageID]["prezzo"] + "€"
+			);
+			$("#btnCard-" + (i + 1)).prop({"name": data["data"][i + basePageID]["id"]});
+		}
+		catch (e) {
+			_buttonNextPage.hide();
+			$("#cb"+(i+1)).hide();
+		}
+	}
+}
