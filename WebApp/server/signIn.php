@@ -26,7 +26,7 @@
         $nominativo=$con->real_escape_string($_REQUEST["nominativo"]);
         $username=$con->real_escape_string($_REQUEST["username"]);
 
-        $sql="INSERT INTO clienti (username,nominativo,password,email) VALUES('$email','$nominativo','$pw','$email')";
+        $sql="INSERT INTO clienti (username,nominativo,password,email) VALUES('$username','$nominativo','$pw','$email')";
         $data=_eseguiQuery($con,$sql);
 
         echo json_encode(array("ris"=>"ok"));
