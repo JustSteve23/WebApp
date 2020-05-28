@@ -1,6 +1,6 @@
 <?php
     
-	define ("SCADENZA", 600);
+	define ("SCADENZA", 1200);
 	
 	function _connection($dbName){
 		define('DBHOST', 'localhost');

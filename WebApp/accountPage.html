@@ -48,10 +48,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: white" id="aboutUsBtn">AboutUs</a>
+            <a class="nav-link" href="aboutUs.html" style="color: white" id="aboutUsBtn">AboutUs</a>
           </li>
           <li class="nav-item">
-           <strong><a class="nav-link" href="accountPage.html" style="color: white" id="accBtn">Accedi</a></strong>
+           <strong><a class="nav-link corsivo" href="accountPage.html" style="color: white" id="accBtn">Accedi</a></strong>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" style="color: white" id="logOut">LogOut</a>
@@ -82,11 +82,11 @@
         <button type="button" class="btn btn-link" style="color: #3acbcb; height:18px;margin-left: -10%" id="usrChange">
           -Cambia Username
         </button>
-        <button type="button" class="btn btn-link" style="color: #3acbcb; height:18px;margin-left: -14%" id="emailChange">
-          -Cambia E-Mail
-        </button>
         <button type="button" class="btn btn-link" style="color: #3acbcb; height:18px;margin-left: -9%" id="nomChange">
           -Cambia Nominativo
+        </button>
+        <button type="button" class="btn btn-link" style="color: #3acbcb; height:18px;margin-left: -14%" id="emailChange">
+          -Cambia E-Mail
         </button>
       </div>
       <!-- /.col-md-4 -->
@@ -101,7 +101,11 @@
     </div>
 
     <div class="col-md-12">
-      <table class="table table-hover">
+      <div id="listaVuotaBox" style="color: white; text-align: center">
+      <p class="corsivo" style="font-size: 33pt">Lista veicoli vuota</p>
+      <p class="corsivo" style="font-size: 21pt">Naviga tra le auto più esclusive di sempre per aggiungerne qualcuna</p>
+      </div>
+      <table class="table">
         <thead style="color: white; font-size: 18pt" class="corsivo">
           <tr>
             <th scope="col"> Marca </th>
@@ -109,9 +113,10 @@
             <th scope="col"> Potenza </th>
             <th scope="col"> Cilindrata </th>
             <th scope="col"> Prezzo </th>
+            <th scope="col">  </th>
           </tr>
         </thead>
-        <tbody style="color: white;">
+        <tbody style="color: white; cursor: pointer;" id="tbody">
 
         </tbody>
       </table>

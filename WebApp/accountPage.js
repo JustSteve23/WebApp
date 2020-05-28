@@ -5,11 +5,11 @@ $(document).ready(function() {
 	let _wrapper=$("#wrapper");
 	let _splashScreen=$("#splashScreen");
 
-
 	_body.addClass("bodyW");
 	_wrapper.hide();
 	_splashScreen.show();
 
+	$("#listaVuotaBox").hide();
 
 	let RQindex;
 	//for(let i=0;i<6;i++){
@@ -42,13 +42,60 @@ $(document).ready(function() {
 		);
 	});
 
-	let RQlistaPreferiti=inviaRichiesta("POST","server/listaPreferiti.php");
+	let RQlistaPreferiti=inviaRichiesta("POST","server/elencoPreferiti.php");
 	RQlistaPreferiti.fail(function () {
 		error();
 	});
 	RQlistaPreferiti.done(function (data) {
-		
+		dataPush(data)
 	});
+
+	function dataPush(data){
+		console.log(data);
+		$("#tbody").empty();
+		if (data.length>0) {
+			$("#listaVuotaBox").hide();
+			for (let i = 0; i < data.length; i++) {
+				let _tr = $("<tr>").appendTo($("#tbody"));
+				$("<th>").html(data[i]["marca"]).prop({"name": data[i]["id"]}).appendTo(_tr).on("click", function () {
+					moreInfoRedirect($(this).prop("name"));
+				});
+				$("<th>").html(data[i]["modello"]).prop({"name": data[i]["id"]}).appendTo(_tr).on("click", function () {
+					moreInfoRedirect($(this).prop("name"));
+				});
+				$("<th>").html(data[i]["potenza"] + " CV").prop({"name": data[i]["id"]}).appendTo(_tr).on("click", function () {
+					moreInfoRedirect($(this).prop("name"));
+				});
+				$("<th>").html(data[i]["cilindrata"] + " cm3").prop({"name": data[i]["id"]}).appendTo(_tr).on("click", function () {
+					moreInfoRedirect($(this).prop("name"));
+				});
+				$("<th>").html(data[i]["prezzo"] + "€").prop({"name": data[i]["id"]}).appendTo(_tr).on("click", function () {
+					moreInfoRedirect($(this).prop("name"));
+				});
+				$("<th>").html("Rimuovi").prop("name",data[i]["id"]).addClass("underline").appendTo(_tr).on("click",function () {
+					let RQListaPreferitiRimuovi=inviaRichiesta("POST","server/rimuoviPreferiti.php",{"id":$(this).prop("name")})
+					RQListaPreferitiRimuovi.fail(function (jqXHR,test_status,str_error) {
+						error(jqXHR,test_status,str_error);
+					})
+					RQListaPreferitiRimuovi.done(function (data) {
+						console.log(data["ris"]);
+						RQlistaPreferiti=inviaRichiesta("POST","server/elencoPreferiti.php");
+						RQlistaPreferiti.fail(function (jqXHR,test_status,str_error) {
+							error(jqXHR,test_status,str_error);
+						});
+						RQlistaPreferiti.done(function (data) {
+							dataPush(data);
+						})
+					})
+				})
+			}
+		}
+		else
+		{
+			$(".table").hide();
+			$("#listaVuotaBox").show();
+		}
+	}
 
 	$("#logOut").on("click",function () {
 		let RQLogOut=inviaRichiesta("POST","server/logOut.php");
@@ -71,4 +118,10 @@ $(document).ready(function() {
 		window.location.href="nominativoChange.html";
 	})
 })
+
+function moreInfoRedirect(_thisID) {
+	localStorage.removeItem("idForInfo");
+	localStorage.setItem("idForInfo",_thisID);
+	window.location.href="moreInfo.html";
+}
 

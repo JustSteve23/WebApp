@@ -55,6 +55,16 @@ $(document).ready(function() {
 		);
 	});
 
+	$(".preferiti").prop("name",localStorage.getItem("idForInfo")).on("click",function () {
+		let RQPreferitiAdd=inviaRichiesta("POST","server/addFavouritesList.php",{"id":$(this).prop("name")});
+		RQPreferitiAdd.fail(function (jqXHR,test_status,str_error) {
+			error(jqXHR,test_status,str_error);
+		})
+		RQPreferitiAdd.done(function (data) {
+			console.log(data);
+		})
+	})
+
 	$("#logOut").on("click",function () {
 		let RQLogOut=inviaRichiesta("POST","server/logOut.php");
 		window.location.href="index.html";

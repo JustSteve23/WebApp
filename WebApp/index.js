@@ -5,6 +5,7 @@ $(document).ready(function() {
 	let _wrapper=$("#wrapper");
 	let _splashScreen=$("#splashScreen");
 	let carData;
+	let favouriteList;
 
 	let _lblPageNumber=$("#lblPage");
 	let _buttonBackPage=$("#btnPBack");
@@ -20,7 +21,6 @@ $(document).ready(function() {
 	_body.addClass("bodyW");
 	_wrapper.hide();
 	_splashScreen.show();
-
 
 	let RQindex;
 	//for(let i=0;i<6;i++){
@@ -73,6 +73,16 @@ $(document).ready(function() {
 		_lblPageNumber.html(pagenumber);
 		dataPush(carData,pagenumber,_buttonBackPage,_buttonNextPage)
 	})
+
+	$(".preferiti").on("click",function () {
+		let RQPreferitiAdd=inviaRichiesta("POST","server/addFavouritesList.php",{"id":$(this).prop("name")});
+		RQPreferitiAdd.fail(function (jqXHR,test_status,str_error) {
+			error(jqXHR,test_status,str_error);
+		})
+		RQPreferitiAdd.done(function (data) {
+			console.log(data);
+		})
+	})
 })
 
 function dataPush(data,pagenumber,_buttonBackPage,_buttonNextPage) {
@@ -115,6 +125,7 @@ function dataPushAus(data,i,basePageID) {
 		"-Prezzo: " + data["data"][i + basePageID]["prezzo"] + "€"
 	);
 	$("#btnCard-" + (i + 1)).prop({"name": data["data"][i + basePageID]["id"]});
+	$("#btnCardPreferiti-" + (i + 1)).prop({"name": data["data"][i + basePageID]["id"]});
 }
 
 function caricaSelect(data) {

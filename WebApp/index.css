@@ -67,3 +67,8 @@ body {
   top: 46%;
 }
 
+.underline:hover{
+  color: #3acbcb;
+  text-decoration: underline;
+}
+
