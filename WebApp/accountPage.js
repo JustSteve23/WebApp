@@ -58,19 +58,24 @@ $(document).ready(function() {
 			for (let i = 0; i < data.length; i++) {
 				let _tr = $("<tr>").appendTo($("#tbody"));
 				$("<th>").html(data[i]["marca"]).prop({"name": data[i]["id"]}).appendTo(_tr).on("click", function () {
-					moreInfoRedirect($(this).prop("name"));
+					idSet($(this).prop("name"));
+					window.location.href="moreInfo.html";
 				});
 				$("<th>").html(data[i]["modello"]).prop({"name": data[i]["id"]}).appendTo(_tr).on("click", function () {
-					moreInfoRedirect($(this).prop("name"));
+					idSet($(this).prop("name"));
+					window.location.href="moreInfo.html";
 				});
 				$("<th>").html(data[i]["potenza"] + " CV").prop({"name": data[i]["id"]}).appendTo(_tr).on("click", function () {
-					moreInfoRedirect($(this).prop("name"));
+					idSet($(this).prop("name"));
+					window.location.href="moreInfo.html";
 				});
 				$("<th>").html(data[i]["cilindrata"] + " cm3").prop({"name": data[i]["id"]}).appendTo(_tr).on("click", function () {
-					moreInfoRedirect($(this).prop("name"));
+					idSet($(this).prop("name"));
+					window.location.href="moreInfo.html";
 				});
 				$("<th>").html(data[i]["prezzo"] + "€").prop({"name": data[i]["id"]}).appendTo(_tr).on("click", function () {
-					moreInfoRedirect($(this).prop("name"));
+					idSet($(this).prop("name"));
+					window.location.href="moreInfo.html";
 				});
 				$("<th>").html("Rimuovi").prop("name",data[i]["id"]).addClass("underline").appendTo(_tr).on("click",function () {
 					let RQListaPreferitiRimuovi=inviaRichiesta("POST","server/rimuoviPreferiti.php",{"id":$(this).prop("name")})
@@ -87,6 +92,10 @@ $(document).ready(function() {
 							dataPush(data);
 						})
 					})
+				})
+				$("<th>").html("Preventivo").prop("name",data[i]["id"]).addClass("underline").appendTo(_tr).on("click",function () {
+					idSet($(this).prop("name"));
+					window.location.href="preventivo.html";
 				})
 			}
 		}
@@ -119,9 +128,8 @@ $(document).ready(function() {
 	})
 })
 
-function moreInfoRedirect(_thisID) {
+function idSet(_thisID) {
 	localStorage.removeItem("idForInfo");
 	localStorage.setItem("idForInfo",_thisID);
-	window.location.href="moreInfo.html";
 }
 

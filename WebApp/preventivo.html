@@ -19,7 +19,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js" charset="utf8"></script>
-  <script src="accountPage.js"> </script>
+  <script src="preventivo.js"> </script>
   <script src="imagesArray.js"> </script>
   <script src="libreria.js"> </script>
 
@@ -63,65 +63,39 @@
 
   <!-- Page Content -->
   <div class="container">
+    <div class="card text-white text-center" style="background-color: transparent; border:0; margin-top: 30px; margin-bottom: -50px" >
+      <div class="card-body">
+        <p class="text-white m-0" style="font-size: 40pt; font-family:Times,Verdana,Serif" id="carName-Model">Test text</p>
+      </div>
+    </div>
 
     <!-- Heading Row -->
     <div class="row align-items-center my-5">
-      <div class="col-lg-7">
-        <img src="img/icon.png" class="w-100" >
+      <div class="col-lg-12">
+        <div style="text-align: center">
+          <img class="img-fluid rounded mb-4 mb-lg-0" src="img/ImgBig.jpg" alt="" id="carImg" style="vertical-align: center">
+        </div>
       </div>
-      <!-- /.col-lg-8 -->
-      <div class="col-lg-5" style="color: white;">
-        <h1 class="font-weight-light corsivo" style="font-size: 50pt" id="nominativo">name</h1>
-        <p id="dettagliAccount" style="font-size: 20pt">
-          lorem ipsum
-        </p>
-        <h2 style="font-size: 35pt">Gestione account</h2>
-        <button type="button" class="btn btn-link" style="color: #3acbcb; height:18px; margin-left: -10.5%" id="pwChange">
-          -Cambia Password
-        </button>
-        <button type="button" class="btn btn-link" style="color: #3acbcb; height:18px;margin-left: -10%" id="usrChange">
-          -Cambia Username
-        </button>
-        <button type="button" class="btn btn-link" style="color: #3acbcb; height:18px;margin-left: -9%" id="nomChange">
-          -Cambia Nominativo
-        </button>
-        <button type="button" class="btn btn-link" style="color: #3acbcb; height:18px;margin-left: -14%" id="emailChange">
-          -Cambia E-Mail
-        </button>
-      </div>
-      <!-- /.col-md-4 -->
     </div>
+
+    <div id="wr2" style="margin-bottom: 10px; border-radius: 3%;">
     <!-- /.row -->
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <p id="ToWriteDetails" style="font-size: 20pt; font-family:Times,Verdana,Serif; color: white; text-align: center;">Test text </p>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
 
-    <!-- Call to Action Well -->
-    <div class="card text-white my-5 py-4 text-center" style="background-color: transparent; border:0;">
-      <div class="card-body">
-        <p class="text-white m-0 corsivo" style="font-size: 25pt">Lista dei Preferiti</p>
+      <div style="text-align: center">
+      <a class="btn btn-info btn-sm corsivo preferiti" id="preventivo" style="margin-top: 1%; margin-left: 2%; color: white">Richiedi Preventivo</a>
+        <div class="alert corsivo" style="color: white; font-size: 20pt" id="lblInv">
+          <strong>Mail Inviata</strong>
+        </div>
       </div>
     </div>
 
-    <div class="col-md-12">
-      <div id="listaVuotaBox" style="color: white; text-align: center">
-      <p class="corsivo" style="font-size: 33pt">Lista veicoli vuota</p>
-      <p class="corsivo" style="font-size: 21pt">Naviga tra le auto più esclusive di sempre per aggiungerne qualcuna</p>
-      </div>
-      <table class="table">
-        <thead style="color: white; font-size: 18pt" class="corsivo">
-          <tr>
-            <th scope="col"> Marca </th>
-            <th scope="col"> Modello </th>
-            <th scope="col"> Potenza </th>
-            <th scope="col"> Cilindrata </th>
-            <th scope="col"> Prezzo </th>
-            <th scope="col">  </th>
-            <th scope="col">  </th>
-          </tr>
-        </thead>
-        <tbody style="color: white; cursor: pointer;" id="tbody">
-
-        </tbody>
-      </table>
-    </div>
 
   </div>
   <!-- /.container -->
