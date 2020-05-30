@@ -22,9 +22,12 @@ $(document).ready(function() {
 	_wrapper.hide();
 	_splashScreen.show();
 
+	RQpreferiti();
+
 	let RQindex;
+	setTimeout(function () {
 	//for(let i=0;i<6;i++){
-	RQindex=inviaRichiesta("GET","server/elencoAuto.php");
+		RQindex=inviaRichiesta("GET","server/elencoAuto.php");
 	//}
 
 	RQindex.fail(function (jqXHR,test_status,str_error) {
@@ -50,7 +53,10 @@ $(document).ready(function() {
 		caricaSelect(data,_selectMarca,_selectTipoMotote);
 
 		dataPush(data,pagenumber,_buttonBackPage,_buttonNextPage);
+
+		preferitiBtnControl(favouriteList);
 	});
+	},1000);
 
 	$(".moreInfo").on("click",function () {
 		localStorage.removeItem("idForInfo");
@@ -67,11 +73,13 @@ $(document).ready(function() {
 		pagenumber++;
 		_lblPageNumber.html(pagenumber);
 		dataPush(carData,pagenumber,_buttonBackPage,_buttonNextPage)
+		preferitiBtnControl(favouriteList);
 	})
 	_buttonBackPage.on("click",function(){
 		pagenumber--;
 		_lblPageNumber.html(pagenumber);
 		dataPush(carData,pagenumber,_buttonBackPage,_buttonNextPage)
+		preferitiBtnControl(favouriteList);
 	})
 
 	$(".preferiti").on("click",function () {
@@ -82,7 +90,21 @@ $(document).ready(function() {
 		RQPreferitiAdd.done(function (data) {
 			console.log(data);
 		})
+		setTimeout(function () {
+			RQpreferiti();
+			setTimeout(function () {
+				preferitiBtnControl(favouriteList);
+			},200)
+		},200)
 	})
+
+	function RQpreferiti() {
+		let RQpreferiti = inviaRichiesta("POST", "server/elencoPreferiti.php");
+		RQpreferiti.done(function (data) {
+			favouriteList = data;
+			console.log(favouriteList);
+		})
+	}
 })
 
 function dataPush(data,pagenumber,_buttonBackPage,_buttonNextPage) {
@@ -106,7 +128,7 @@ function dataPush(data,pagenumber,_buttonBackPage,_buttonNextPage) {
 
 	for (let i=0;i<6;i++){
 		try{
-				dataPushAus(data,i,basePageID);
+			dataPushAus(data,i,basePageID);
 		}
 		catch (e) {
 			_buttonNextPage.hide();
@@ -126,6 +148,7 @@ function dataPushAus(data,i,basePageID) {
 	);
 	$("#btnCard-" + (i + 1)).prop({"name": data["data"][i + basePageID]["id"]});
 	$("#btnCardPreferiti-" + (i + 1)).prop({"name": data["data"][i + basePageID]["id"]});
+
 }
 
 function caricaSelect(data) {
@@ -142,6 +165,17 @@ function caricaSelect(data) {
 		if (!tipoMotoreArr.includes(data["data"][i]["tipoMotore"].split(" ")[0])){
 			tipoMotoreArr[i]=data["data"][i]["tipoMotore"].split(" ")[0];
 			$("<option>").prop("value", tipoMotoreArr[i]).html(tipoMotoreArr[i]).appendTo(_selectTipoMotote);
+		}
+	}
+}
+
+function preferitiBtnControl(favList) {
+	for (let i = 0; i < 6; i++) {
+		$("#btnCardPreferiti-" + (i + 1)).addClass("btn-sm").addClass("btn-info").css({"pointer-events":"all"});
+		for (let j = 0; j < favList.length; j++) {
+			if (favList[j]["id"] == $("#btnCardPreferiti-" + (i + 1)).prop("name"))
+				$("#btnCardPreferiti-" + (i + 1)).removeClass("btn-sm").removeClass("btn-info").css({"border": "1px solid #3acbcb","pointer-events":"none"});
+
 		}
 	}
 }

@@ -8,7 +8,7 @@ $(document).ready(function() {
 	_body.addClass("bodyW");
 	_wrapper.hide();
 	_splashScreen.show();
-
+	let favouriteList;
 
 	let RQindex;
 	//for(let i=0;i<6;i++){
@@ -55,6 +55,13 @@ $(document).ready(function() {
 		);
 	});
 
+	setTimeout(function () {
+		RQpreferiti();
+		setTimeout(function () {
+			preferitiBtnControl(favouriteList);
+		},200)
+	},200)
+
 	$(".preferiti").prop("name",localStorage.getItem("idForInfo")).on("click",function () {
 		let RQPreferitiAdd=inviaRichiesta("POST","server/addFavouritesList.php",{"id":$(this).prop("name")});
 		RQPreferitiAdd.fail(function (jqXHR,test_status,str_error) {
@@ -63,10 +70,34 @@ $(document).ready(function() {
 		RQPreferitiAdd.done(function (data) {
 			console.log(data);
 		})
+		setTimeout(function () {
+			RQpreferiti();
+			setTimeout(function () {
+				preferitiBtnControl(favouriteList);
+			},200)
+		},200)
 	})
 
 	$("#logOut").on("click",function () {
 		let RQLogOut=inviaRichiesta("POST","server/logOut.php");
 		window.location.href="index.html";
 	})
+
+	function RQpreferiti() {
+		let RQpreferiti = inviaRichiesta("POST", "server/elencoPreferiti.php");
+		RQpreferiti.done(function (data) {
+			favouriteList = data;
+			console.log(favouriteList);
+		})
+	}
 })
+function preferitiBtnControl(favList) {
+	for (let i = 0; i < 6; i++) {
+		$("#btnCardPreferiti-" + (i + 1)).addClass("btn-sm").addClass("btn-info").css({"pointer-events":"all"});
+		for (let j = 0; j < favList.length; j++) {
+			if (favList[j]["id"] == localStorage.getItem("idForInfo"))
+				$("#btnCardPreferiti-2").removeClass("btn-sm").removeClass("btn-info").css({"border": "1px solid #3acbcb","pointer-events":"none"});
+
+		}
+	}
+}
