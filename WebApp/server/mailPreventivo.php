@@ -51,6 +51,7 @@ $lunghezza=$data["data"][$id]["lunghezza"];
 $larghezza=$data["data"][$id]["larghezza"];
 $aPr=$data["data"][$id]["annoProduzione"];
 $peso=$data["data"][$id]["peso"];
+$scarico=$_REQUEST["scarico"];
 
 $mail->Subject = 'Preventivo '.$data["data"][$id]["marca"];
 $mail->Body = "
@@ -67,6 +68,7 @@ $mail->Body = "
     -Fari: $fari<br>
     -CopriPastiglie: $copriPastiglie<br>
     -Cerchi: $cerchi<br>
+    -Scarico: $scarico<br>
     <strong style='font-size: 17pt'> Prezzo: $prezzo €</strong></p>
 ";
 $mail->isHTML(true);
