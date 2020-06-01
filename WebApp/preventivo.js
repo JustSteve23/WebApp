@@ -53,6 +53,7 @@ $(document).ready(function() {
 		let fari=["Standard","Xeno +1500€"];
 		let copriPastiglie=["Standard","Rosso +800€","Giallo +800€","Verde +1000€"];
 		let cerchi=["Lega","Carbonio +8000€","OZ Racing +10000€"];
+		let scarico=["standard","Racing +3500€"];
 		$("#ToWriteDetails").html(
 			"-Potenza: "+data["data"][id]["potenza"]+" CV<br>"+
 			"-Cilindrata: "+data["data"][id]["cilindrata"]+" cm3<br>"+
@@ -65,25 +66,28 @@ $(document).ready(function() {
 			"-Colore: <select id='colors' style='font-size: 15pt;border: 0;border-bottom: 1px solid #3acbcb; background-color: transparent; color: white;'></select></br>"+
 			"-Fari: <select id='fari' style='font-size: 15pt;border: 0;border-bottom: 1px solid #3acbcb; background-color: transparent; color: white;'></select><br>"+
 			"-Copri pastiglie: <select id='copriPastiglie' style='font-size: 15pt;border: 0;border-bottom: 1px solid #3acbcb; background-color: transparent; color: white;'></select><br>"+
-			"-Cerchi: <select id='cerchi' style='font-size: 15pt;border: 0;border-bottom: 1px solid #3acbcb; background-color: transparent; color: white;'></select><br>"
+			"-Cerchi: <select id='cerchi' style='font-size: 15pt;border: 0;border-bottom: 1px solid #3acbcb; background-color: transparent; color: white;'></select><br>"+
+			"-Scarico: <select id='scarico' style='font-size: 15pt;border: 0;border-bottom: 1px solid #3acbcb; background-color: transparent; color: white;'></select>"
 		)
 		setOption(colors,"colors");
 		setOption(fari,"fari");
 		setOption(copriPastiglie,"copriPastiglie");
 		setOption(cerchi,"cerchi");
+		setOption(scarico,"scarico");
 
 		prezzoTot=parseInt(data["data"][id]["prezzo"]);
 
 	});
 
 	$("#preventivo").on("click",function () {
-		prezzoTot=prezzoTot+parseInt($("#colors option:selected").prop("value"))+parseInt($("#fari option:selected").prop("value"))+parseInt($("#copriPastiglie option:selected").prop("value"))+parseInt($("#cerchi option:selected").prop("value"));
+		prezzoTot=prezzoTot+parseInt($("#colors option:selected").prop("value"))+parseInt($("#fari option:selected").prop("value"))+parseInt($("#copriPastiglie option:selected").prop("value"))+parseInt($("#cerchi option:selected").prop("value"))+parseInt($("#scarico option:selected").prop("value"));
 		console.log(prezzoTot);
 		let colore=$("#colors option:selected").html().split("+")[0];
 		let fari=$("#fari option:selected").html().split("+")[0];
 		let copriPastiglie=$("#copriPastiglie option:selected").html().split("+")[0];
 		let cerchi=$("#cerchi option:selected").html().split("+")[0];
-		let RQemailPreventivo=inviaRichiesta("POST","server/mailPreventivo.php",{"dataCar":dataCar,"colore":colore,"Fari":fari,"copriPastiglie":copriPastiglie,"cerchi":cerchi,"prezzo":prezzoTot,"id":id});
+		let scarico=$("#scarico option:selected").html().split("+")[0];
+		let RQemailPreventivo=inviaRichiesta("POST","server/mailPreventivo.php",{"dataCar":dataCar,"colore":colore,"Fari":fari,"copriPastiglie":copriPastiglie,"cerchi":cerchi,"prezzo":prezzoTot,"id":id,"scarico":scarico});
 		$("#lblInv").show();
 	});
 
