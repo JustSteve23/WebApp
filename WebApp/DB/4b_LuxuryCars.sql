@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Creato il: Giu 01, 2020 alle 17:22
+-- Creato il: Giu 02, 2020 alle 19:51
 -- Versione del server: 10.4.11-MariaDB
 -- Versione PHP: 7.4.1
 
@@ -100,8 +100,7 @@ CREATE TABLE `clienti` (
 --
 
 INSERT INTO `clienti` (`username`, `nominativo`, `password`, `email`) VALUES
-('Chiara74', 'Chiara Ambrogio', '96216b1b1a816f6692a34250e0f8896d', 'chiara.ambrogio@gmail.com'),
-('fenice75', 'Diego Belliardo', 'fb4e34463f9be0d3c55868cd5261ba1b', 'diego.belly.75@gmail.com'),
+('GigaChopper69', 'Mario Chopra', 'de2f15d014d40b93578d255e6221fd60', 'chopra.mario@gmail.com'),
 ('JustSteve23', 'Stefano Grosso', '8eaeaf2ca7d64c01a313a8bec95a7395', 's.grosso.0918@vallauri.edu'),
 ('Test', 'test test', '098f6bcd4621d373cade4e832627b4f6', 'test.test@gmail.com');
 
@@ -121,13 +120,10 @@ CREATE TABLE `preferiti` (
 --
 
 INSERT INTO `preferiti` (`email`, `idAuto`) VALUES
-('chiara.ambrogio@gmail.com', 4),
-('chiara.ambrogio@gmail.com', 3),
-('chiara.ambrogio@gmail.com', 12),
-('chiara.ambrogio@gmail.com', 8),
 ('s.grosso.0918@vallauri.edu', 3),
 ('s.grosso.0918@vallauri.edu', 22),
-('s.grosso.0918@vallauri.edu', 2);
+('s.grosso.0918@vallauri.edu', 1),
+('chopra.mario@gmail.com', 12);
 
 --
 -- Indici per le tabelle scaricate
