@@ -122,10 +122,6 @@ CREATE TABLE `preferiti` (
 --
 
 INSERT INTO `preferiti` (`email`, `idAuto`) VALUES
-('chiara.ambrogio@gmail.com', 4),
-('chiara.ambrogio@gmail.com', 3),
-('chiara.ambrogio@gmail.com', 12),
-('chiara.ambrogio@gmail.com', 8),
 ('s.grosso.0918@vallauri.edu', 3),
 ('s.grosso.0918@vallauri.edu', 22),
 ('s.grosso.0918@vallauri.edu', 1),
