@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Creato il: Giu 02, 2020 alle 19:51
+-- Creato il: Giu 03, 2020 alle 12:12
 -- Versione del server: 10.4.11-MariaDB
 -- Versione PHP: 7.4.1
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `4b_LuxuryCars`
 --
+CREATE DATABASE IF NOT EXISTS `4b_LuxuryCars` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `4b_LuxuryCars`;
 
 -- --------------------------------------------------------
 
@@ -120,10 +122,15 @@ CREATE TABLE `preferiti` (
 --
 
 INSERT INTO `preferiti` (`email`, `idAuto`) VALUES
+('chiara.ambrogio@gmail.com', 4),
+('chiara.ambrogio@gmail.com', 3),
+('chiara.ambrogio@gmail.com', 12),
+('chiara.ambrogio@gmail.com', 8),
 ('s.grosso.0918@vallauri.edu', 3),
 ('s.grosso.0918@vallauri.edu', 22),
 ('s.grosso.0918@vallauri.edu', 1),
-('chopra.mario@gmail.com', 12);
+('chopra.mario@gmail.com', 12),
+('s.grosso.0918@vallauri.edu', 14);
 
 --
 -- Indici per le tabelle scaricate
